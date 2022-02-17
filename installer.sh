@@ -6,6 +6,7 @@ echo "    download plugins to hdd   "
 echo "============================================================================================================================="
 #####################################################################################
 echo "      download plugins to hdd    "
+mkdir -p /media/hdd/download-plugins
 cd /tmp
 set -e 
 wget -q  "https://drive.google.com/uc?id=1RTeS5tq8S7yLvgZdHKCQbVrWjZJEWdkz&export=download"
@@ -43,6 +44,8 @@ echo "**************************************************************************
 wait
 killall -9 enigma2
 exit 0
+
+
 
 
 
