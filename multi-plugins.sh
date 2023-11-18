@@ -1,5 +1,6 @@
-#!/usr/bin/bash
+#!/bin/sh
 #
+cd /tmp
 echo " Download Plugins "
 echo "  1 - Cccam"
     echo "  2 - Ncam"
@@ -9,13 +10,15 @@ echo "  1 - Cccam"
     echo "  6 - Ajpanel"
     echo "  7 - Dreamsatpanel"
     echo "  8 - Keyadder"
+    echo "  9 - Jedimakerxtream"
+    echo "  10 - xtreamity"
+    echo "  11 - Iptosat"
     echo
     echo "  0 - Exit"
     echo
     echo "- Enter option:"
 
     read -r choice
-
 if [ $choice -eq 1 ]
 then
 sleep 1
@@ -64,19 +67,29 @@ sleep 1
 echo " download plugin Keyadder "
 wget -q "--no-check-certificate" https://dreambox4u.com/emilnabil237/KeyAdder/installer.sh -O - | /bin/sh
 
+elif [ $choice -eq 9 ]
+then
+sleep 1
+echo " download plugin Jedimakerxtream "
+wget https://dreambox4u.com/emilnabil237/plugins/jedimakerxtream/installer.sh -qO - | /bin/sh
+
+elif [ $choice -eq 10 ]
+then
+sleep 1
+echo " download plugin xtreamity "
+wget https://dreambox4u.com/emilnabil237/plugins/xtreamity/installer.sh -O - | /bin/sh
+
+elif [ $choice -eq 11 ]
+then
+sleep 1
+echo " download plugin Iptosat "
+wget -q "--no-check-certificate" https://dreambox4u.com/emilnabil237/plugins/iptosat/installer.sh -O - | /bin/sh
+
 elif [ $choice -eq 0 ]
 then
 clear
 echo " thank you "
 fi
-sleep 0.8
-sync
-echo ""
-echo ""
-echo "******************************************************"
 exit
-
-
-
 
 
