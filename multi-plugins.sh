@@ -13,6 +13,7 @@ echo "  1 - Cccam"
     echo "  9 - Jedimakerxtream"
     echo "  10 - xtreamity"
     echo "  11 - Iptosat"
+    echo "  12 - Ipaudio 6.7"
     echo
     echo "  0 - Exit"
     echo
@@ -85,11 +86,18 @@ sleep 1
 echo " download plugin Iptosat "
 wget -q "--no-check-certificate" https://dreambox4u.com/emilnabil237/plugins/iptosat/installer.sh -O - | /bin/sh
 
+elif [ $choice -eq 12 ]
+then
+sleep 1
+echo " download plugin Ipaudio 6.7"
+wget -q "--no-check-certificate" https://dreambox4u.com/emilnabil237/plugins/ipaudio/installer.sh -O - | /bin/sh
+
 elif [ $choice -eq 0 ]
 then
 clear
 echo " thank you "
 fi
 exit
+
 
 
