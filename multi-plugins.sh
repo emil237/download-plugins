@@ -3,20 +3,20 @@
 cd /tmp
 echo " Download Plugins "
 choice="$1"
-echo "  1 - Cccam"
-    echo "  2 - Ncam"
-    echo "  3 - Oscam"
-    echo "  4 - Raedquicksignal"
-    echo "  5 - Arabicsavior"
-    echo "  6 - Ajpanel"
-    echo "  7 - Dreamsatpanel"
-    echo "  8 - Keyadder"
-    echo "  9 - Jedimakerxtream"
-    echo "  10 - xtreamity"
-    echo "  11 - Iptosat"
-    echo "  12 - Ipaudio 6.7"
+echo -e "\e[35m  1 - Cccam"
+    echo -e "\e[33m  2 - Ncam"
+    echo -e "\e[35m  3 - Oscam"
+    echo -e "\e[32m  4 - Raedquicksignal"
+    echo -e "\e[33m  5 - Arabicsavior"
+    echo -e "\e[35m  6 - Ajpanel"
+    echo -e "\e[32m  7 - Dreamsatpanel"
+    echo -e "\e[33m  8 - Keyadder"
+    echo -e "\e[31m  9 - Jedimakerxtream"
+    echo -e "\e[32m  10 - xtreamity"
+    echo -e "\e[35m  11 - Iptosat"
+    echo -e "\e[31m  12 - Ipaudio 6.7"
     echo
-    echo "  0 - Exit"
+    echo -e "\e[32m  0 - Exit"
     echo
     echo "- Enter option:"
 
@@ -98,7 +98,13 @@ then
 clear
 echo " thank you "
  fi
+echo -e "\e[35mUploded By Emil Nabil "
+sleep 3;
 exit
+
+
+
+
 
 
 
