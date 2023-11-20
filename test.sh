@@ -21,7 +21,7 @@ echo "  1 - Cccam"
     echo "- Enter option:"
 
     read choice
-read -ra  <<<"${choice}"
+
 if [ "$choice" -eq "1" ]
 then
 sleep 1
@@ -90,6 +90,7 @@ clear
 echo " thank you "
  fi
 exit
+
 
 
 
