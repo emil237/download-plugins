@@ -18,7 +18,7 @@ echo -e "\e[35m  1 - Cccam"
     echo
     echo -e "\e[32m  0 - Exit"
     echo
-    echo "- Enter option:"
+    echo "- Enter Numper option:"
 
     read choice
 if [ "$choice" -eq 1 ]
@@ -96,11 +96,13 @@ wget -q "--no-check-certificate" https://dreambox4u.com/emilnabil237/plugins/ipa
 elif [ "$choice" -eq 0 ]
 then
 clear
-echo " thank you "
+echo -e "\e[32m thank you  And Good By "
  fi
 echo -e "\e[35mUploded By Emil Nabil "
 sleep 3;
 exit
+
+
 
 
 
