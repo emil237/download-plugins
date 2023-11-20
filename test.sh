@@ -1,7 +1,7 @@
 #!/bin/sh
 #
 choice="$1"
-cdchoice="$1" /tmp
+cd /tmp
 echo " Download Plugins "
 echo "  1 - Cccam"
     echo "  2 - Ncam"
@@ -90,6 +90,7 @@ clear
 echo " thank you "
  fi
 exit
+
 
 
 
