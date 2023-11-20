@@ -21,74 +21,75 @@ echo "  1 - Cccam"
 
     read choice
 
-if [ "$choice" -eq "1" ]
+if [ "$choice" -eq 1 ]
 then
 sleep 1
 echo " download emu cccam "
 
 
-elif [ "$choice" -eq "2" ]
+elif [ "$choice" -eq 2 ]
 then
 sleep 1
 echo " download emu ncam "
 
 
-elif [ "$choice" -eq "3" ]
+elif [ "$choice" -eq 3 ]
 then
 sleep 1
 echo " download emu oscam "
 
-elif [ "$choice" -eq "4" ]
+elif [ "$choice" -eq 4 ]
 then
 sleep 1
 echo " download plugin Raedquicksignal "
 
-elif [ "$choice" -eq "5" ]
+elif [ "$choice" -eq 5 ]
 then
 sleep 1
 echo " download plugin Arabicsavior "
 
-elif [ "$choice" -eq "6" ]
+elif [ "$choice" -eq 6 ]
 then
 sleep 1
 echo " download plugin Ajpanel "
 
-elif [ "$choice" -eq "7" ]
+elif [ "$choice" -eq 7 ]
 then
 sleep 1
 echo " download plugin Dreamsat Panel "
 
-elif [ "$choice" -eq "8" ]
+elif [ "$choice" -eq 8 ]
 then
 sleep 1
 echo " download plugin Keyadder "
 
-elif [ "$choice" -eq "9" ]
+elif [ "$choice" -eq 9 ]
 then
 sleep 1
 echo " download plugin Jedimakerxtream "
 
-elif [ "$choice" -eq "10" ]
+elif [ "$choice" -eq 10 ]
 then
 sleep 1
 echo " download plugin xtreamity "
 
-elif [ "$choice" -eq "11" ]
+elif [ "$choice" -eq 11 ]
 then
 sleep 1
 echo " download plugin Iptosat "
 
-elif [ "$choice" -eq "12" ]
+elif [ "$choice" -eq 12 ]
 then
 sleep 1
 echo " download plugin Ipaudio 6.7"
 
-elif [ "$choice" -eq "0" ]
+elif [ "$choice" -eq 0 ]
 then
 clear
 echo " thank you "
  fi
 exit
+
 
 
 
