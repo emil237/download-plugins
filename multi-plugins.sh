@@ -2,6 +2,7 @@
 #
 cd /tmp
 echo " Download Plugins "
+choice="$1"
 echo "  1 - Cccam"
     echo "  2 - Ncam"
     echo "  3 - Oscam"
@@ -98,6 +99,8 @@ clear
 echo " thank you "
  fi
 exit
+
+
 
 
 
