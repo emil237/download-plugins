@@ -19,11 +19,12 @@ sleep 1
 cd
 rm -f /tmp/xtraEvent_4.5.tar.gz
 echo "OK"
-echo " UPLOADED BY EMIL_NABIL
+echo " UPLOADED BY EMIL_NABIL "
 sleep 4;
 echo ""
 echo ""
 exit
+
 
 
 
