@@ -2,7 +2,7 @@
 ##
 setup_command="wget https://github.com/emil237/download-plugins/raw/refs/heads/main/backupflash/backupflash.sh -O - | /bin/sh"
 ############################################
-version="9.5"
+version="12.1"
 
 # Detect device architecture
 if [ ! -d '/usr/lib64' ]; then
@@ -157,4 +157,6 @@ sleep 2
 init 3
 
 exit 0
+
+
 
