@@ -1,12 +1,10 @@
 #!/bin/sh
 ##
-setup_command="wget https://raw.githubusercontent.com/emil237/backupflash/main/installer.sh -O - | /bin/sh"
-##########################################
-###########################################
-MY_URL="https://raw.githubusercontent.com/emil237/backupflash/main"
-############################
-version=9.5
+setup_command="wget https://github.com/emil237/download-plugins/raw/refs/heads/main/backupflash/backupflash.sh -O - | /bin/sh"
+############################################
+version="9.5"
 
+# Detect device architecture
 if [ ! -d '/usr/lib64' ]; then
 	LIBPATH='/usr/lib'
 else
@@ -36,7 +34,7 @@ elif uname -r | grep -q "4.9"; then
     fi
 else
     echo "##############################################"
-    echo "#     Sorry, plugin does not support your STB      #"
+    echo "#  Sorry, plugin does not support your STB  #"
     echo "##############################################"
     exit 1
 fi
@@ -53,15 +51,18 @@ else
 fi
 
 # Determine package manager
-if [ -f $DreamOS ]; then
-    STATUS=$DreamOS
+if [ -f "$DreamOS" ]; then
+    STATUS="$DreamOS"
+    OS_TYPE="dream"
 else
-    STATUS=/var/lib/opkg/status
+    STATUS="/var/lib/opkg/status"
+    OS_TYPE="opkg"
 fi
 
 # Check for installed packages
+missing_pkg=0
 for pkg in wget pigz xz flash-scripts $CRYPT; do
-    if grep -q $pkg $STATUS; then
+    if grep -q "Package: $pkg" "$STATUS" 2>/dev/null || grep -q "^$pkg" "$STATUS" 2>/dev/null; then
         echo "$pkg is installed"
     else
         echo "Missing $pkg, will attempt to install."
@@ -71,40 +72,73 @@ done
 
 # Install missing packages
 if [ "$missing_pkg" = "1" ]; then
-    if [ -f $DreamOS ]; then
+    if [ "$OS_TYPE" = "dream" ]; then
         dpkg --configure -a
         apt-get update
-        apt-get install wget pigz xz python-twisted-web flash-scripts python-requests $CRYPT -y
+        apt-get install wget pigz xz flash-scripts python-requests $CRYPT -y
     elif [ "$PYTHON" = "PY3" ]; then
         opkg update
-        opkg install wget pigz xz python-twisted-web flash-scripts python3-requests $CRYPT
+        opkg install wget pigz xz python3-twisted-web flash-scripts python3-requests $CRYPT
     else
         opkg update
         opkg install wget pigz xz flash-scripts python-requests $CRYPT
     fi
+    
+    # Check if installation was successful
+    if [ $? -ne 0 ]; then
+        echo "Failed to install required packages. Please check your internet connection and repositories."
+        exit 1
+    fi
 fi
 
 # Remove old versions
-for dir in /media/ba/backupflashe $LIBPATH/enigma2/python/Plugins/Extensions/{backupflashe,backupflashe2,dBackup}; do
+for dir in /media/ba/backupflashe $LIBPATH/enigma2/python/Plugins/Extensions/backupflashe \
+           $LIBPATH/enigma2/python/Plugins/Extensions/backupflashe2 \
+           $LIBPATH/enigma2/python/Plugins/Extensions/dBackup; do
     if [ -d "$dir" ]; then
+        echo "Removing old version: $dir"
         rm -rf "$dir"
     fi
 done
 
+# Remove broken symlinks
+if [ -L "$LIBPATH/enigma2/python/Plugins/Extensions/backupflashe" ]; then
+    rm -f "$LIBPATH/enigma2/python/Plugins/Extensions/backupflashe"
+fi
+
 # Download and install new version
 cd /tmp || exit 1
-wget "${MY_URL}/backupflash.tar.gz"
+
+# Download the plugin archive
+echo "Downloading backupflash plugin..."
+wget "https://github.com/emil237/download-plugins/raw/refs/heads/main/backupflash/backupflash.tar.gz" -O backupflash.tar.gz
+
+# Check if download was successful
+if [ ! -f "backupflash.tar.gz" ]; then
+    echo "Failed to download backupflash plugin!"
+    exit 1
+fi
+
+# Extract the archive
+echo "Installing backupflash plugin..."
 tar -xzf backupflash.tar.gz -C /
+
+# Check if extraction was successful
+if [ $? -ne 0 ]; then
+    echo "Failed to extract backupflash plugin!"
+    rm -f backupflash.tar.gz
+    exit 1
+fi
 
 # Save plugin from BA protection
 if [ -f "/media/ba/ba.sh" ] && [ -d "$LIBPATH/enigma2/python/Plugins/Extensions/backupflashe" ]; then
-    mv /usr/lib/enigma2/python/Plugins/Extensions/backupflashe /media/ba
-    ln -s /media/ba/backupflashe /usr/lib/enigma2/python/Plugins/Extensions
+    echo "Moving plugin to BA protected area..."
+    mv "$LIBPATH/enigma2/python/Plugins/Extensions/backupflashe" /media/ba/
+    ln -sf /media/ba/backupflashe "$LIBPATH/enigma2/python/Plugins/Extensions/backupflashe"
 fi
 
 # Cleanup
-rm -f backupflash-"$version".tar.gz
-cd ..
+rm -f backupflash.tar.gz
 sync
 
 # Completion message
@@ -113,9 +147,14 @@ echo "#          BackupFlash INSTALLED SUCCESSFULLY           #"
 echo "#                 Raed  &  mfaraj57                     #"
 echo "#########################################################"
 echo "#             PLEASE RESTART YOUR STB                   #"
-echo "##########################################################"
-sleep 3
-killall -9 enigma2
-exit 0
+echo "#########################################################"
 
+# Restart enigma2 
+echo "Restarting enigma2..."
+sleep 2
+init 4
+sleep 2
+init 3
+
+exit 0
 
